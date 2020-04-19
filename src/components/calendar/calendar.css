@@ -1,5 +1,5 @@
 .calendar-container {
-    min-height: 50vh;
+    min-height: 70vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -29,4 +29,20 @@
     padding-bottom: 4px;
     background-color: rgba(112, 76, 182, 0.1);
     border-radius: 2px;
+}
+
+.calendar-day {
+    border: 2px solid transparent;
+    color: rgb(11, 176, 182);
+    background-color: rgba(112, 176, 182, 0.1);
+}
+
+.empty{
+    border: 2px solid transparent;
+    background-color: rgba(1, 76, 82, 0.1);
+}
+
+.today {
+    border:  2px solid;
+    background-color: rgba(1, 76, 82, 0.15);
 }
