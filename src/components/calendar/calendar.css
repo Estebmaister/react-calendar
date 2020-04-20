@@ -1,69 +1,70 @@
 .calendar-container {
-    min-height: 70vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
+  min-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
 }
 .row {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
-  
+
 .row:not(:last-child) {
-    margin-bottom: 16px;
+  margin-bottom: 16px;
 }
 
 .week-day {
-    appearance: none;
-    background: none;
-    font-size: 1em;
-    padding-left: 0.25em;
-    padding-right: 0.25em;
-    padding: 0.4em 0.25em 0.1em 0.25em;
-    outline: none;
-    border: 2px solid transparent;
-    color: rgb(112, 76, 182);
-    padding-bottom: 0.1em;
-    background-color: rgba(112, 76, 182, 0.1);
-    border-radius: 2px;
+  appearance: none;
+  background: none;
+  width: 3em;
+  font-size: 1em;
+  padding-left: 0.25em;
+  padding-right: 0.25em;
+  padding: 0.4em 0.25em 0.1em 0.25em;
+  outline: none;
+  border: 2px solid transparent;
+  color: rgb(112, 76, 182);
+  padding-bottom: 0.1em;
+  background-color: rgba(112, 76, 182, 0.1);
+  border-radius: 2px;
 }
 
 .calendar-day {
-    height: 4em;
-    border: 2px solid transparent;
-    color: rgb(11, 176, 182);
-    background-color: rgba(112, 176, 182, 0.1);
-    text-align: start;
-    vertical-align: initial;
+  height: 4em;
+  border: 2px solid transparent;
+  color: rgb(11, 176, 182);
+  background-color: rgba(112, 176, 182, 0.1);
+  text-align: start;
+  vertical-align: initial;
 }
 .calendar-day:hover {
-    border: 2px solid transparent;
-    color: rgb(182, 11, 25);
-    background-color: rgba(197, 94, 26, 0.233);
-    cursor: pointer; 
+  border: 2px solid transparent;
+  color: rgb(182, 11, 25);
+  background-color: rgba(197, 94, 26, 0.233);
+  cursor: pointer;
 }
 
-.empty{
-    border: 2px solid transparent;
-    color: rgb(83, 82, 82);
-    background-color: rgba(1, 76, 82, 0.1);
+.empty {
+  border: 2px solid transparent;
+  color: rgb(83, 82, 82);
+  background-color: rgba(1, 76, 82, 0.1);
 }
-.empty:hover{
-    border: 2px solid transparent;
-    color: rgb(83, 82, 82);
-    background-color: rgba(1, 76, 82, 0.1);
-    cursor: default;
+.empty:hover {
+  border: 2px solid transparent;
+  color: rgb(83, 82, 82);
+  background-color: rgba(1, 76, 82, 0.1);
+  cursor: default;
 }
 
 .today {
-    border:  2px solid;
-    background-color: rgba(1, 76, 82, 0.15);
+  border: 2px solid;
+  background-color: rgba(1, 76, 82, 0.15);
 }
 
 span {
-    width: 100%;
+  width: 100%;
 }
