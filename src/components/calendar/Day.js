@@ -19,6 +19,7 @@ export default class Day extends React.Component {
     this.month = this.month.bind(this);
     this.year = this.year.bind(this);
     this.firstDayOfMonth = this.firstDayOfMonth.bind(this);
+    this.onSave = this.onSave.bind(this);
     this.lastDayOfMonth = moment(this.state.dateObject)
       .endOf("month")
       .format("D");
@@ -40,18 +41,22 @@ export default class Day extends React.Component {
 
   onClick = (event) => {
     this.props.onDayClick(event, this.state.day);
+  };
+
+  onDoubleClick = (event) => {
     this.setState({
-      popperAnchor: event.currentTarget,
+      popperAnchor: Boolean(this.popperAnchor) ? null : event.currentTarget,
     });
   };
 
-  onSave = (reminder, event) => {
-    console.log(reminder);
+  onSave = (reminder) => {
     const { reminders } = this.state;
     reminders.push(reminder);
     this.setState({
       popperAnchor: null,
-      reminders: reminders,
+      reminders: reminders.sort(
+        (r1, r2) => parseFloat(r1.startTime) - parseFloat(r2.startTime)
+      ),
     });
   };
 
@@ -60,6 +65,7 @@ export default class Day extends React.Component {
       <td
         key={"d" + this.props.day}
         className={`calendar-day ${this.props.currentDay}`}
+        onDoubleClick={this.onDoubleClick}
       >
         <span
           key={"sDay" + this.props.day}
@@ -74,8 +80,19 @@ export default class Day extends React.Component {
         </span>
         <div className="reminds">
           {this.state.reminders.map((remind, index) => (
-            <span className="spanRemind" key={"remind" + index}>
-              {String(remind)}
+            <span
+              className={"spanRemind " + remind.category}
+              key={"remind" + index}
+            >
+              {console.log(index)}
+              <p className={"text-reminder"}>
+                <button className={"dlt-butt"}>{"x"} </button>
+                {String(remind.text)}
+              </p>
+              {String(remind.city)}
+              <br />
+              {String(remind.startTime)}
+              <br />
             </span>
           ))}
         </div>

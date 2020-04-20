@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import Popper from "@material-ui/core/Popper";
 import { useSpring, animated } from "react-spring/web.cjs"; // web.cjs is required for IE 11 support
+import CreateReminder from "./CreateReminder.js";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -43,21 +44,12 @@ Fade.propTypes = {
   onExited: PropTypes.func,
 };
 
-let input = "Reminder";
-const handleChange = (event) => {
-  input = event.target.value;
-};
-const onClickSave = (e, props) => {
-  props.onSave(input, e);
-};
-
 export default function SpringPopper(props) {
   const classes = useStyles();
-  const { anchorEl } = props;
+  const { anchorEl, onSave } = props;
 
   const handleClick = (event) => {
-    console.log("click-in");
-    console.log(event);
+    console.log("click-in not assigned in div");
   };
 
   const open = Boolean(anchorEl);
@@ -75,11 +67,13 @@ export default function SpringPopper(props) {
         {({ TransitionProps }) => (
           <Fade {...TransitionProps}>
             <div className={classes.paper} onClick={handleClick}>
-              Add reminder
-              <button onClick={(e) => onClickSave(e, props)}>Save</button>
-              <br />
-              <input placeholder="Reminder" onChange={handleChange}></input>
-              <popReminder />
+              <CreateReminder
+                placeholder={""}
+                text={""}
+                city={""}
+                category={""}
+                onSave={onSave}
+              />
             </div>
           </Fade>
         )}

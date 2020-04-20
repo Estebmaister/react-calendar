@@ -35,6 +35,7 @@
 }
 
 .calendar-day {
+  min-width: 4em;
   font-size: 1em;
   height: 4em;
   border: 2px solid transparent;
@@ -82,9 +83,42 @@
 }
 
 .spanRemind {
-  width: 100%;
-  height: 1em;
-  display: inline-block;
+  display: block;
+  max-width: 8em;
+  height: auto;
   font-size: 0.6em;
   color: black;
+  background-color: rgb(131, 182, 11);
+  overflow-x: hidden;
+  overflow-x: auto;
+}
+.home {
+  background-color: rgba(212, 40, 40, 0.637);
+}
+
+.work {
+  background-color: rgba(60, 212, 40, 0.637);
+}
+
+.calendar {
+  background-color: rgba(212, 195, 40, 0.637);
+}
+
+.dlt-butt {
+  background-color: #555;
+  border: 1px solid transparent;
+  color: white;
+  text-transform: uppercase;
+  padding: 0.45em;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+p.text-reminder {
+  margin: 0;
+  white-space: nowrap;
+  width: 6em;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
