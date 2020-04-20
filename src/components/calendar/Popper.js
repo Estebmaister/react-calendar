@@ -6,8 +6,8 @@ import { useSpring, animated } from "react-spring/web.cjs"; // web.cjs is requir
 
 const useStyles = makeStyles((theme) => ({
   paper: {
+    border: "1px solid transparent",
     padding: theme.spacing(1),
-    marginLeft: 15,
     backgroundColor: theme.palette.background.paper,
   },
 }));
@@ -43,13 +43,23 @@ Fade.propTypes = {
   onExited: PropTypes.func,
 };
 
-const onClickSave = (props) => {
-  props.onSave("Reminder3\n");
-}
+let input = "Reminder";
+const handleChange = (event) => {
+  input = event.target.value;
+};
+const onClickSave = (e, props) => {
+  props.onSave(input, e);
+};
 
 export default function SpringPopper(props) {
   const classes = useStyles();
-  const { anchorEl } = props
+  const { anchorEl } = props;
+
+  const handleClick = (event) => {
+    console.log("click-in");
+    console.log(event);
+  };
+
   const open = Boolean(anchorEl);
   const id = open ? "spring-popper" : undefined;
 
@@ -59,17 +69,21 @@ export default function SpringPopper(props) {
         id={id}
         open={open}
         anchorEl={anchorEl}
-        placement='right'
-        transition>
+        placement="right"
+        transition
+      >
         {({ TransitionProps }) => (
           <Fade {...TransitionProps}>
-            <div className={classes.paper}>
-              Add new reminder
-            <button onClick={(e) => onClickSave(props)}>Save</button>
+            <div className={classes.paper} onClick={handleClick}>
+              Add reminder
+              <button onClick={(e) => onClickSave(e, props)}>Save</button>
+              <br />
+              <input placeholder="Reminder" onChange={handleChange}></input>
+              <popReminder />
             </div>
           </Fade>
         )}
       </Popper>
-    </div >
+    </div>
   );
 }

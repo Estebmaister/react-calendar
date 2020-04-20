@@ -62,13 +62,14 @@ export default class Calendar extends React.Component {
 
   makeDays = () => {
     let daysInMonth = [];
-    for (let d = 1; d <= this.lastDayOfMonth; d++) {
+    for (let day = 1; day <= this.lastDayOfMonth; day++) {
       daysInMonth.push(
         <Day
-          day={d}
-          currentDay={d == this.state.selectedDay ? "today" : ""}
+          key={"day" + day}
+          day={day}
+          currentDay={day === this.state.selectedDay ? "today" : ""}
           onDayClick={this.onDayClick}
-          fullDate={moment({ day: d })}
+          fullDate={moment({ day: day })}
         />
       );
     }
@@ -78,10 +79,10 @@ export default class Calendar extends React.Component {
   makeTableCalendar = () => {
     let totalSlots = [...this.makeBlanks(), ...this.makeDays()];
     let rows = [];
-    let cells = [];
+    let week = [];
     totalSlots.forEach((day, index) => {
       if (index % 7 !== 0) {
-        cells.push(day); // if index not equal 7 that means not go to next week
+        week.push(day); // if index not equal 7 that means not go to next week
       } else {
         rows.push(week); // push week array in rows when next week is reached
         week = []; // empty container for next week
@@ -103,7 +104,7 @@ export default class Calendar extends React.Component {
         rows.push(week); // push the final week
       }
     });
-    return rows.map((d, i) => <tr key={"week" + i}>{d}</tr>);
+    return rows.map((day, index) => <tr key={"week" + index}>{day}</tr>);
   };
 
   onDayClick = (e, d) => {
