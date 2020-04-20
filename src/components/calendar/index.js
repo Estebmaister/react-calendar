@@ -2,19 +2,17 @@ import React from "react";
 import moment from "moment";
 import Day from "./Day.js";
 import "./calendar.css";
-//import SpringPopper from "./Popper.js";
 
 console.log("Calendar, mounting text");
 
 export default class Calendar extends React.Component {
   constructor(props) {
     super(props);
-    // today = moment.Today ---> La fecha de hoy (sacas el dia)
+
     this.state = {
       dateObject: moment(),
       allMonths: moment.months(),
-      selectedDay: null, 
-      //selectedDay: Lo que calculaste arriba
+      selectedDay: moment().date(),
     };
 
     this.weekdaysShortName = moment.weekdaysShort().map((day) => (
@@ -22,27 +20,22 @@ export default class Calendar extends React.Component {
         {day}
       </th>
     ));
+
     this.currentDayF = this.currentDayF.bind(this);
     this.month = this.month.bind(this);
     this.year = this.year.bind(this);
     this.firstDayOfMonth = this.firstDayOfMonth.bind(this);
     this.makeBlanks = this.makeBlanks.bind(this);
     this.makeDays = this.makeDays.bind(this);
-
-    this.lastDayOfMonth = moment(this.state.dateObject)
-      .endOf("month")
-      .format("D");
-
+    this.lastDayOfMonth = moment(this.state.dateObject).endOf("month").format("D");
     this.makeTableCalendar = this.makeTableCalendar.bind(this);
-
     this.onDayClick = this.onDayClick.bind(this);
   }
+
   currentDayF = () => parseInt(this.state.dateObject.format("D"));
   month = () => this.state.dateObject.format("MMMM");
   year = () => this.state.dateObject.format("Y");
-
-  firstDayOfMonth = () =>
-    moment(this.state.dateObject).startOf("month").format("d");
+  firstDayOfMonth = () => moment(this.state.dateObject).startOf("month").format("d");
 
   makeBlanks = () => {
     let blanks = [];
@@ -58,20 +51,18 @@ export default class Calendar extends React.Component {
       );
     }
     return blanks;
-  };}
+  };
+
 
   makeDays = () => {
     let daysInMonth = [];
     for (let d = 1; d <= this.lastDayOfMonth; d++) {
-      //let currentDay = d === this.currentDayF() ? "today" : "";
       daysInMonth.push(
         <Day
-          className={d == this.state.selectedDay ? "today" : ""}
           day={d}
-          //currentDay={currentDay}
+          currentDay={d == this.state.selectedDay ? "today" : ""}
           onDayClick={this.onDayClick}
-          fullDate={moment()}
-          //selected={}
+          fullDate={moment({ day: d })}
         />
       );
     }
@@ -112,22 +103,9 @@ export default class Calendar extends React.Component {
   };
 
   onDayClick = (e, d) => {
-    this.setState(
-      {
-        dateObject: moment(
-          `${this.state.dateObject.format("YYYYMM")}${
-            String(d).length === 1 ? "0" + d : d
-          }`
-        ),
-        selectedDay: d,
-      },
-      () => {
-        console.log("SELECTED DAY: ", this.state.selectedDay);
-        console.log(d);
-        console.log(this.state.dateObject);
-      }
-    );
+    this.setState({ selectedDay: d })
   };
+
   render() {
     return (
       <div className="calendar-container">
