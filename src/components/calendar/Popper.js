@@ -6,8 +6,8 @@ import { useSpring, animated } from "react-spring/web.cjs"; // web.cjs is requir
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    border: "1px solid",
     padding: theme.spacing(1),
+    marginLeft: 15,
     backgroundColor: theme.palette.background.paper,
   },
 }));
@@ -43,29 +43,33 @@ Fade.propTypes = {
   onExited: PropTypes.func,
 };
 
-export default function SpringPopper() {
+const onClickSave = (props) => {
+  props.onSave("Reminder3\n");
+}
+
+export default function SpringPopper(props) {
   const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState(null);
-
-  const handleClick = (event) => {
-    setAnchorEl(anchorEl ? null : event.currentTarget);
-  };
-
+  const { anchorEl } = props
   const open = Boolean(anchorEl);
   const id = open ? "spring-popper" : undefined;
 
   return (
     <div>
-      <button aria-describedby={id} type="button" onClick={handleClick}>
-        Toggle Popper
-      </button>
-      <Popper id={id} open={open} anchorEl={anchorEl} transition>
+      <Popper
+        id={id}
+        open={open}
+        anchorEl={anchorEl}
+        placement='right'
+        transition>
         {({ TransitionProps }) => (
           <Fade {...TransitionProps}>
-            <div className={classes.paper}>The content of the Popper.</div>
+            <div className={classes.paper}>
+              Add new reminder
+            <button onClick={(e) => onClickSave(props)}>Save</button>
+            </div>
           </Fade>
         )}
       </Popper>
-    </div>
+    </div >
   );
 }

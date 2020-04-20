@@ -1,17 +1,18 @@
 import React from "react";
 import moment from "moment";
+import Day from "./Day.js";
 import "./calendar.css";
-// import SpringPopper from "./Popper.js";
 
-console.log("Prueba1");
+console.log("Calendar, mounting text");
 
 export default class Calendar extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
       dateObject: moment(),
       allMonths: moment.months(),
-      selectedDay: null,
+      selectedDay: moment().date(),
     };
 
     this.weekdaysShortName = moment.weekdaysShort().map((day) => (
@@ -62,11 +63,13 @@ export default class Calendar extends React.Component {
   makeDays = () => {
     let daysInMonth = [];
     for (let d = 1; d <= this.lastDayOfMonth; d++) {
-      let currentDay = d === this.currentDayF() ? "today" : "";
       daysInMonth.push(
-        <td key={"day" + d} className={`calendar-day ${currentDay}`}>
-          <span onClick={(e) => this.onDayClick(e, d)}>{d}</span>
-        </td>
+        <Day
+          day={d}
+          currentDay={d == this.state.selectedDay ? "today" : ""}
+          onDayClick={this.onDayClick}
+          fullDate={moment({ day: d })}
+        />
       );
     }
     return daysInMonth;
@@ -80,16 +83,16 @@ export default class Calendar extends React.Component {
       if (index % 7 !== 0) {
         cells.push(day); // if index not equal 7 that means not go to next week
       } else {
-        rows.push(cells); // when reach next week we contain all td in last week to rows
-        cells = []; // empty container
-        cells.push(day); // in current loop we still push current row to new container
+        rows.push(week); // push week array in rows when next week is reached
+        week = []; // empty container for next week
+        week.push(day); // in current loop we still push current row to new container
       }
       if (index === totalSlots.length - 1) {
         // when end loop we add remain date
         let j = index;
         let afterMonth = 1;
         while (j % 7 !== 6) {
-          cells.push(
+          week.push(
             <td key={"aftBlank" + afterMonth} className="calendar-day empty">
               {afterMonth}
             </td>
@@ -97,28 +100,14 @@ export default class Calendar extends React.Component {
           j++;
           afterMonth++;
         }
-        rows.push(cells);
+        rows.push(week); // push the final week
       }
     });
     return rows.map((d, i) => <tr key={"week" + i}>{d}</tr>);
   };
 
   onDayClick = (e, d) => {
-    this.setState(
-      {
-        dateObject: moment(
-          `${this.state.dateObject.format("YYYYMM")}${
-            String(d).length === 1 ? "0" + d : d
-          }`
-        ),
-        selectedDay: d,
-      },
-      () => {
-        console.log("SELECTED DAY: ", this.state.selectedDay);
-        console.log(d);
-        console.log(this.state.dateObject);
-      }
-    );
+    this.setState({ selectedDay: d });
   };
 
   render() {
