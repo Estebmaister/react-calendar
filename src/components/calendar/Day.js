@@ -124,13 +124,13 @@ export default class Day extends React.Component {
                 </button>
                 {String(remind.text)}
               </p>
-              {String(remind.city)}
+              {String(remind.city)}{" "}
+              <Forecast city={remind.city} date={remind.date} />
               <br />
               {String(remind.startTime)}
               <br />
             </span>
           ))}
-          <Forecast />
         </div>
       </td>
     );

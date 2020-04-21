@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import Conditions from "./Conditions.js";
 
-const Forecast = () => {
+export default function Forecast(props) {
   let [responseObj, setResponseObj] = useState({});
-  function getForecast() {
+  console.log(props);
+  const { city } = props;
+  const uriEncodedCity = encodeURIComponent(city);
+  function getForecast(event) {
+    event.preventDefault();
     fetch(
-      "https://api.openweathermap.org/data/2.5/weather?q=caracas&appid=beb8a90b9eb6304fecf85b2eb1ae5ff1",
+      `https://api.openweathermap.org/data/2.5/weather?q=${uriEncodedCity}&appid=beb8a90b9eb6304fecf85b2eb1ae5ff1`,
       {
         method: "GET",
       }
@@ -19,12 +23,11 @@ const Forecast = () => {
       });
   }
   return (
-    <div>
-      <p style={{ fontSize: "0.5em" }}>FindCurrentW</p>
-      <div style={{ fontSize: "0.5em" }}>{JSON.stringify(responseObj)}</div>
+    <span style={{ fontSize: "0.5em" }}>
       <Conditions responseObj={responseObj} />
-      <button onClick={getForecast}>Get F</button>
-    </div>
+      <button type="button" onClick={getForecast}>
+        Weather
+      </button>
+    </span>
   );
-};
-export default Forecast;
+}
