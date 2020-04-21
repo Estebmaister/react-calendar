@@ -9,13 +9,13 @@ export default class CreateReminder extends React.Component {
       text: "Reminder",
       city: "Bogota",
       category: "home",
-      date: "4/20/2020",
+      date: props.fullDate.format("YYYY-MM-DD"),
       startTime: "10:00:00",
     };
 
     this.state.endTime = `${
       parseInt(this.state.startTime.slice(0, 2), 10) + 1
-    }:${this.state.startTime.slice(2)}`;
+      }:${this.state.startTime.slice(2)}`;
 
     this.currentDayF = this.currentDayF.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -23,6 +23,7 @@ export default class CreateReminder extends React.Component {
     this.handleChangeCity = this.handleChangeCity.bind(this);
     this.handleChangeCategory = this.handleChangeCategory.bind(this);
     this.handleChangeStartTime = this.handleChangeStartTime.bind(this);
+    this.handleChangeDate = this.handleChangeDate.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.onClose = this.onClose.bind(this);
   }
@@ -50,6 +51,12 @@ export default class CreateReminder extends React.Component {
   handleChangeStartTime(event) {
     this.setState({
       startTime: event.target.value,
+    });
+  }
+
+  handleChangeDate(event) {
+    this.setState({
+      date: event.target.value,
     });
   }
 
@@ -107,6 +114,11 @@ export default class CreateReminder extends React.Component {
           type="time"
           value={this.state.startTime}
           onChange={this.handleChangeStartTime}
+        />
+        <input
+          type="date"
+          value={this.state.date}
+          onChange={this.handleChangeDate}
         />
       </form>
     );
