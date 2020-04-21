@@ -1,8 +1,7 @@
 import React from "react";
 import moment from "moment";
 import SpringPopper from "./Popper.js";
-
-console.log("Day, mounting text");
+import Forecast from "./Forecast.js";
 
 export default class Day extends React.Component {
   constructor(props) {
@@ -14,12 +13,15 @@ export default class Day extends React.Component {
       popperAnchor: null,
       reminders: [],
     };
-
+    // Binding functions for "this" access.
     this.currentDayF = this.currentDayF.bind(this);
     this.month = this.month.bind(this);
     this.year = this.year.bind(this);
     this.firstDayOfMonth = this.firstDayOfMonth.bind(this);
     this.onSave = this.onSave.bind(this);
+    this.onClose = this.onClose.bind(this);
+    this.onDeleteRemind = this.onDeleteRemind.bind(this);
+
     this.lastDayOfMonth = moment(this.state.dateObject)
       .endOf("month")
       .format("D");
@@ -60,6 +62,20 @@ export default class Day extends React.Component {
     });
   };
 
+  onClose = () => {
+    this.setState({ popperAnchor: null });
+  };
+
+  onDeleteRemind = (event) => {
+    const { reminders } = this.state;
+    reminders.splice(event.target.value, 1);
+    this.setState({
+      reminders: reminders.sort(
+        (r1, r2) => parseFloat(r1.startTime) - parseFloat(r2.startTime)
+      ),
+    });
+  };
+
   render() {
     return (
       <td
@@ -76,6 +92,7 @@ export default class Day extends React.Component {
           <SpringPopper
             anchorEl={this.state.popperAnchor}
             onSave={this.onSave}
+            onClose={this.onClose}
           />
         </span>
         <div className="reminds">
@@ -84,9 +101,14 @@ export default class Day extends React.Component {
               className={"spanRemind " + remind.category}
               key={"remind" + index}
             >
-              {console.log(index)}
               <p className={"text-reminder"}>
-                <button className={"dlt-butt"}>{"x"} </button>
+                <button
+                  value={index}
+                  className={"dlt-butt"}
+                  onClick={this.onDeleteRemind}
+                >
+                  {"x"}{" "}
+                </button>
                 {String(remind.text)}
               </p>
               {String(remind.city)}
@@ -95,6 +117,7 @@ export default class Day extends React.Component {
               <br />
             </span>
           ))}
+          <Forecast />
         </div>
       </td>
     );

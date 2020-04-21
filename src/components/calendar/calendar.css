@@ -91,6 +91,7 @@
   background-color: rgb(131, 182, 11);
   overflow-x: hidden;
   overflow-x: auto;
+  border-radius: 0.5em;
 }
 .home {
   background-color: rgba(212, 40, 40, 0.637);

@@ -3,8 +3,6 @@ import moment from "moment";
 import Day from "./Day.js";
 import "./calendar.css";
 
-console.log("Calendar, mounting text");
-
 export default class Calendar extends React.Component {
   constructor(props) {
     super(props);

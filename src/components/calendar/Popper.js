@@ -46,7 +46,7 @@ Fade.propTypes = {
 
 export default function SpringPopper(props) {
   const classes = useStyles();
-  const { anchorEl, onSave } = props;
+  const { anchorEl, onSave, onClose } = props;
 
   const handleClick = (event) => {
     console.log("click-in not assigned in div");
@@ -73,6 +73,7 @@ export default function SpringPopper(props) {
                 city={""}
                 category={""}
                 onSave={onSave}
+                onClose={onClose}
               />
             </div>
           </Fade>
