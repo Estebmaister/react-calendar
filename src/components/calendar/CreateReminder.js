@@ -115,6 +115,7 @@ export default class CreateReminder extends React.Component {
           value={this.state.startTime}
           onChange={this.handleChangeStartTime}
         />
+        <br />
         <input
           type="date"
           value={this.state.date}
