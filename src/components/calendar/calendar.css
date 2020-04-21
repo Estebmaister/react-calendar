@@ -94,15 +94,15 @@
   border-radius: 0.5em;
 }
 .home {
-  background-color: rgba(212, 40, 40, 0.637);
+  background-color: rgba(237, 64, 64, 0.637);
 }
 
 .work {
-  background-color: rgba(60, 212, 40, 0.637);
+  background-color: rgba(80, 230, 113, 0.637);
 }
 
 .calendar {
-  background-color: rgba(212, 195, 40, 0.637);
+  background-color: rgba(128, 206, 237, 0.637);
 }
 
 .dlt-butt {
