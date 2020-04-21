@@ -74,6 +74,7 @@ export default function SpringPopper(props) {
                 category={""}
                 onSave={onSave}
                 onClose={onClose}
+                fullDate={props.fullDate}
               />
             </div>
           </Fade>

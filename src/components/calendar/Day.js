@@ -41,6 +41,25 @@ export default class Day extends React.Component {
     }));
   }
 
+  componentWillReceiveProps = (nextProps) => {
+    const newReminder = nextProps.addReminder
+    if (newReminder.date &&
+      newReminder.date.isSame(this.props.fullDate, 'day')) {
+      const currentReminder = this.props.addReminder
+      const currentReminderIndex = (currentReminder.reminder ? currentReminder.reminder.currentReminder : -1)
+      if (newReminder.reminder.currentReminder !== currentReminderIndex) {
+        const { reminders } = this.state;
+        reminders.push(newReminder.reminder);
+        this.setState({
+          popperAnchor: null,
+          reminders: reminders.sort(
+            (r1, r2) => parseFloat(r1.startTime) - parseFloat(r2.startTime)
+          ),
+        });
+      }
+    }
+  }
+
   onClick = (event) => {
     this.props.onDayClick(event, this.state.day);
   };
@@ -52,14 +71,7 @@ export default class Day extends React.Component {
   };
 
   onSave = (reminder) => {
-    const { reminders } = this.state;
-    reminders.push(reminder);
-    this.setState({
-      popperAnchor: null,
-      reminders: reminders.sort(
-        (r1, r2) => parseFloat(r1.startTime) - parseFloat(r2.startTime)
-      ),
-    });
+    this.props.createNewReminder(reminder.date, reminder)
   };
 
   onClose = () => {
@@ -93,6 +105,7 @@ export default class Day extends React.Component {
             anchorEl={this.state.popperAnchor}
             onSave={this.onSave}
             onClose={this.onClose}
+            fullDate={this.props.fullDate}
           />
         </span>
         <div className="reminds">

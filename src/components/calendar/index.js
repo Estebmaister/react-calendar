@@ -11,6 +11,10 @@ export default class Calendar extends React.Component {
       dateObject: moment(),
       allMonths: moment.months(),
       selectedDay: moment().date(),
+      addReminder: {
+        date: null,
+        reminder: null,
+      },
     };
 
     this.weekdaysShortName = moment.weekdaysShort().map((day) => (
@@ -31,6 +35,7 @@ export default class Calendar extends React.Component {
     this.makeDays = this.makeDays.bind(this);
     this.makeTableCalendar = this.makeTableCalendar.bind(this);
     this.onDayClick = this.onDayClick.bind(this);
+    this.createNewReminder = this.createNewReminder.bind(this);
   }
 
   currentDayF = () => parseInt(this.state.dateObject.format("D"));
@@ -68,6 +73,8 @@ export default class Calendar extends React.Component {
           currentDay={day === this.state.selectedDay ? "today" : ""}
           onDayClick={this.onDayClick}
           fullDate={moment({ day: day })}
+          createNewReminder={this.createNewReminder}
+          addReminder={this.state.addReminder}
         />
       );
     }
@@ -104,6 +111,15 @@ export default class Calendar extends React.Component {
     });
     return rows.map((day, index) => <tr key={"week" + index}>{day}</tr>);
   };
+
+  createNewReminder = (date, reminder) => {
+    this.setState({
+      addReminder: {
+        date: moment(date),
+        reminder: reminder,
+      }
+    })
+  }
 
   onDayClick = (e, d) => {
     this.setState({ selectedDay: d });
