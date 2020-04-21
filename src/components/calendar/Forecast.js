@@ -3,8 +3,7 @@ import Conditions from "./Conditions.js";
 
 export default function Forecast(props) {
   let [responseObj, setResponseObj] = useState({});
-  console.log(props);
-  const { city } = props;
+  const { city, date } = props;
   const uriEncodedCity = encodeURIComponent(city);
   function getForecast(event) {
     event.preventDefault();
@@ -23,10 +22,10 @@ export default function Forecast(props) {
       });
   }
   return (
-    <span style={{ fontSize: "0.5em" }}>
+    <span style={{ fontSize: "0.7em" }}>
       <Conditions responseObj={responseObj} />
-      <button type="button" onClick={getForecast}>
-        Weather
+      <button className="forecast-button" type="button" onClick={getForecast}>
+        Update Weather Forecast
       </button>
     </span>
   );

@@ -48,10 +48,6 @@ export default function SpringPopper(props) {
   const classes = useStyles();
   const { anchorEl, onSave, onClose } = props;
 
-  const handleClick = (event) => {
-    console.log("click-in not assigned in div");
-  };
-
   const open = Boolean(anchorEl);
   const id = open ? "spring-popper" : undefined;
 
@@ -66,7 +62,7 @@ export default function SpringPopper(props) {
       >
         {({ TransitionProps }) => (
           <Fade {...TransitionProps}>
-            <div className={classes.paper} onClick={handleClick}>
+            <div className={classes.paper}>
               <CreateReminder
                 placeholder={""}
                 text={""}
