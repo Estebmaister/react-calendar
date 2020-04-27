@@ -1,0 +1,33 @@
+.calendar-navi {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 3em;
+  width: 100%;
+}
+
+.month-change {
+  display: block;
+  padding: 0 1em;
+  margin: 1em;
+  height: 50%;
+  font-weight: 700;
+  color: white;
+  background: rgb(112, 76, 182);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.month-change:hover {
+  color: rgb(112, 76, 182);
+  background-color: white;
+}
+
+.icon-folder {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 10px;
+  border: 2px solid red;
+}
