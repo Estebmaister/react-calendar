@@ -6,6 +6,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 After the creation of the template, a Calendar component was created and begun the development process of the real app.
 
+Double click in a date of the month and see the action.
+
 ## Available Scripts
 
 In the project directory, you can run:
