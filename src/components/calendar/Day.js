@@ -1,137 +1,126 @@
 import React from "react";
-import moment from "moment";
-import SpringPopper from "./Popper.js";
+import Avatar from '@material-ui/core/Avatar';
+import AddIcon from '@material-ui/icons/Add';
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
 import Forecast from "./Forecast.js";
+import ReminderDialog from "./ReminderDialog.js"
 
 export default class Day extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      day: 1,
-      currentDay: "",
-      dateObject: moment(),
-      popperAnchor: null,
-      reminders: [],
+      day: props.day,
+      currentDay: props.currentDay,
+      formatedFullDate: props.fullDate.format("YYYY-MM-DD")
     };
     // Binding functions for "this" access.
-    this.currentDayF = this.currentDayF.bind(this);
-    this.month = this.month.bind(this);
-    this.year = this.year.bind(this);
-    this.firstDayOfMonth = this.firstDayOfMonth.bind(this);
-    this.onSave = this.onSave.bind(this);
-    this.onClose = this.onClose.bind(this);
-    this.onDeleteRemind = this.onDeleteRemind.bind(this);
-
-    this.lastDayOfMonth = moment(this.state.dateObject)
-      .endOf("month")
-      .format("D");
-  }
-
-  currentDayF = () => parseInt(this.state.dateObject.format("D"));
-  month = () => this.state.dateObject.format("MMMM");
-  year = () => this.state.dateObject.format("Y");
-  firstDayOfMonth = () =>
-    moment(this.state.dateObject).startOf("month").format("d");
-
-  componentDidMount() {
-    this.setState((state, props) => ({
-      day: props.day || state.day,
-      currentDay: props.currentDay || state.currentDay,
-      dateObject: props.dateObject || state.dateObject,
-    }));
-  }
-
-  componentWillReceiveProps = (nextProps) => {
-    const newReminder = nextProps.addReminder
-    if (newReminder.date &&
-      newReminder.date.isSame(this.props.fullDate, 'day')) {
-      const currentReminder = this.props.addReminder
-      const currentReminderIndex = (currentReminder.reminder ? currentReminder.reminder.currentReminder : -1)
-      if (newReminder.reminder.currentReminder !== currentReminderIndex) {
-        const { reminders } = this.state;
-        reminders.push(newReminder.reminder);
-        this.setState({
-          popperAnchor: null,
-          reminders: reminders.sort(
-            (r1, r2) => parseFloat(r1.startTime) - parseFloat(r2.startTime)
-          ),
-        });
-      }
-    }
+    this.onClick = this.onClick.bind(this);
+    this.addReminder = this.addReminder.bind(this);
   }
 
   onClick = (event) => {
     this.props.onDayClick(event, this.state.day);
   };
 
-  onDoubleClick = (event) => {
-    this.setState({
-      popperAnchor: Boolean(this.popperAnchor) ? null : event.currentTarget,
-    });
-  };
+  addReminder = (newReminder) => {
+    this.props.addReminder(
+      this.state.formatedFullDate,
+      {
+        title: newReminder.reminderTitle,
+        city: newReminder.reminderCity,
+        date: this.state.formatedFullDate,
+        startTime: newReminder.reminderStartTime,
+        category: newReminder.reminderCategory,
+      },
+    )
+  }
 
-  onSave = (reminder) => {
-    this.props.createNewReminder(reminder.date, reminder)
-  };
+  editReminder = (index, newReminder) => {
+    this.props.editReminder(
+      this.state.formatedFullDate,
+      index,
+      {
+        title: newReminder.reminderTitle,
+        city: newReminder.reminderCity,
+        date: newReminder.reminderDate,
+        startTime: newReminder.reminderStartTime,
+        category: newReminder.reminderCategory,
+      },
+    )
+  }
 
-  onClose = () => {
-    this.setState({ popperAnchor: null });
-  };
-
-  onDeleteRemind = (event) => {
-    const { reminders } = this.state;
-    reminders.splice(event.target.value, 1);
-    this.setState({
-      reminders: reminders.sort(
-        (r1, r2) => parseFloat(r1.startTime) - parseFloat(r2.startTime)
-      ),
-    });
-  };
+  deleteReminder = (reminder) => {
+    this.props.deleteReminder(
+      this.state.formatedFullDate,
+      reminder.index,
+    )
+  }
 
   render() {
+    const { reminders } = this.props;
     return (
       <td
         key={"d" + this.props.day}
         className={`calendar-day ${this.props.currentDay}`}
-        onDoubleClick={this.onDoubleClick}
+        onClick={this.onClick}
       >
+
         <span
           key={"sDay" + this.props.day}
-          onClick={this.onClick}
           className="spanDay"
         >
           {this.state.day}
-          <SpringPopper
-            anchorEl={this.state.popperAnchor}
-            onSave={this.onSave}
-            onClose={this.onClose}
-            fullDate={this.props.fullDate}
-          />
         </span>
+
+        <ReminderDialog
+          action={`Add a new reminder on ${this.state.formatedFullDate}`}
+          showDateField={false}
+          submitText={"Add reminder"}
+          handleSubmit={this.addReminder}
+        >
+          <AddIcon />
+        </ReminderDialog>
+
+        {reminders &&
+          <Avatar onClick={(e) => this.props.deleteAllReminders(this.state.formatedFullDate)}>
+            <DeleteIcon />
+          </Avatar>
+        }
+
         <div className="reminds">
-          {this.state.reminders.map((remind, index) => (
+          {reminders && reminders.map((reminder) => (
             <span
-              className={"spanRemind " + remind.category}
-              key={"remind" + index}
+              className={"spanRemind " + reminder.category}
             >
               <p className={"text-reminder"}>
-                <button
-                  value={index}
-                  className={"dlt-butt"}
-                  onClick={this.onDeleteRemind}
+                {String(reminder.title)}
+                <ReminderDialog
+                  action={`Edit reminder`}
+                  showDateField={true}
+                  submitText={"Update reminder"}
+                  handleSubmit={(r) => this.editReminder(reminder.index, r)}
+                  reminderTitle={reminder.title}
+                  reminderCity={reminder.city}
+                  reminderDate={reminder.date}
+                  reminderStartTime={reminder.startTime}
+                  reminderCategory={reminder.category}
                 >
-                  {"x"}{" "}
-                </button>
-                {String(remind.text)}
+                  <EditIcon />
+                </ReminderDialog>
+                <Avatar onClick={(e) => this.deleteReminder(reminder)}>
+                  <DeleteIcon />
+                </Avatar>
               </p>
-              {String(remind.city)}{" "}
-              <Forecast city={remind.city} date={remind.date} />
+              {String(reminder.city)}{" "}
+              <Forecast city={reminder.city} date={this.state.formatedFullDate} />
               <br />
-              {String(remind.startTime)}
+              {String(reminder.startTime)}
               <br />
             </span>
           ))}
         </div>
+
       </td>
     );
   }
