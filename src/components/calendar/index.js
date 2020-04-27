@@ -1,12 +1,13 @@
 import React from "react";
 import moment from "moment";
-import Avatar from '@material-ui/core/Avatar';
-import IconButton from '@material-ui/core/IconButton';
-import AddIcon from '@material-ui/icons/Add';
-import DeleteIcon from '@material-ui/icons/Delete';
+import Avatar from "@material-ui/core/Avatar";
+import IconButton from "@material-ui/core/IconButton";
+import AddIcon from "@material-ui/icons/Add";
+import DeleteIcon from "@material-ui/icons/Delete";
 import Day from "./Day.js";
 import ReminderDialog from "./ReminderDialog.js";
 import "./calendar.css";
+import "./icons.css";
 
 export default class Calendar extends React.Component {
   constructor(props) {
@@ -68,7 +69,7 @@ export default class Calendar extends React.Component {
   makeDays = () => {
     let daysInMonth = [];
     for (let day = 1; day <= this.lastDayOfMonth; day++) {
-      let fullDate = moment({ day: day }).format("YYYY-MM-DD")
+      let fullDate = moment({ day: day }).format("YYYY-MM-DD");
       daysInMonth.push(
         <Day
           key={"day" + day}
@@ -119,8 +120,11 @@ export default class Calendar extends React.Component {
   };
 
   sortAndUpdateRemindersIndexes = (arrayOfReminders) => {
-    return this.updateRemindersIndexes(arrayOfReminders.sort((r1, r2) =>
-      parseFloat(r1.startTime) - parseFloat(r2.startTime)));
+    return this.updateRemindersIndexes(
+      arrayOfReminders.sort(
+        (r1, r2) => parseFloat(r1.startTime) - parseFloat(r2.startTime)
+      )
+    );
   };
 
   updateRemindersIndexes = (arrayOfReminders) => {
@@ -137,33 +141,34 @@ export default class Calendar extends React.Component {
       arrayOfReminders = newReminders[fullDate];
     }
     arrayOfReminders.push(newReminder);
-    newReminders[fullDate] = this.sortAndUpdateRemindersIndexes(arrayOfReminders);
+    newReminders[fullDate] = this.sortAndUpdateRemindersIndexes(
+      arrayOfReminders
+    );
     this.setState({ reminders: newReminders });
   };
 
   addGlobalReminder = (newReminder) => {
-    this.addReminder(
-      newReminder.reminderDate,
-      {
-        title: newReminder.reminderTitle,
-        city: newReminder.reminderCity,
-        date: newReminder.reminderDate,
-        startTime: newReminder.reminderStartTime,
-        category: newReminder.reminderCategory,
-      },
-    )
-  }
+    this.addReminder(newReminder.reminderDate, {
+      title: newReminder.reminderTitle,
+      city: newReminder.reminderCity,
+      date: newReminder.reminderDate,
+      startTime: newReminder.reminderStartTime,
+      category: newReminder.reminderCategory,
+    });
+  };
 
   editReminder = (fullDate, index, newReminder) => {
     // If date was changed
     if (fullDate !== newReminder.date) {
-      this.deleteReminder(fullDate, index)
-      this.addReminder(newReminder.date, newReminder)
+      this.deleteReminder(fullDate, index);
+      this.addReminder(newReminder.date, newReminder);
     } else {
       let newReminders = this.state.reminders;
       let arrayOfReminders = newReminders[fullDate];
       arrayOfReminders[index] = newReminder;
-      newReminders[fullDate] = this.sortAndUpdateRemindersIndexes(arrayOfReminders);
+      newReminders[fullDate] = this.sortAndUpdateRemindersIndexes(
+        arrayOfReminders
+      );
       this.setState({ reminders: newReminders });
     }
   };
@@ -174,20 +179,20 @@ export default class Calendar extends React.Component {
     arrayOfReminders.splice(index, 1);
     newReminders[fullDate] = this.updateRemindersIndexes(arrayOfReminders);
     if (arrayOfReminders.length === 0) {
-      delete newReminders[fullDate]
+      delete newReminders[fullDate];
     }
     this.setState({ reminders: newReminders });
   };
 
   deleteAllDayReminders = (fullDate) => {
     let newReminders = this.state.reminders;
-    delete newReminders[fullDate]
+    delete newReminders[fullDate];
     this.setState({ reminders: newReminders });
-  }
+  };
 
   deleteAllReminders = (event) => {
-    this.setState({ reminders: {} })
-  }
+    this.setState({ reminders: {} });
+  };
 
   onDayClick = (e, d) => {
     this.setState({ selectedDay: d });
@@ -197,23 +202,27 @@ export default class Calendar extends React.Component {
     return (
       <div className="calendar-container">
         <div className="calendar-navi">
+          <button className="month-change">{"< Prev"}</button>
           <h2>
             <span className="calendar-label">{this.month()} </span>
             <span className="calendar-label">{this.year()} </span>
           </h2>
-          <ReminderDialog
-            action={"Add a new reminder"}
-            showDateField={true}
-            submitText={"Add reminder"}
-            handleSubmit={this.addGlobalReminder}
-          >
-            <AddIcon />
-          </ReminderDialog>
-          <IconButton onClick={this.deleteAllReminders}>
-            <Avatar>
-              <DeleteIcon />
-            </Avatar>
-          </IconButton>
+          <button className="month-change">{"Next >"}</button>
+          <div className="icon-folder">
+            <ReminderDialog
+              action={"Add a new reminder"}
+              showDateField={true}
+              submitText={"Add reminder"}
+              handleSubmit={this.addGlobalReminder}
+            >
+              <AddIcon />
+            </ReminderDialog>
+            <IconButton onClick={this.deleteAllReminders}>
+              <Avatar>
+                <DeleteIcon />
+              </Avatar>
+            </IconButton>
+          </div>
         </div>
         <table style={{ width: "100%" }}>
           <thead className="">

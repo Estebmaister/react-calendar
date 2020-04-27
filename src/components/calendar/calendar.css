@@ -1,4 +1,5 @@
 .calendar-container {
+  width: 100%;
   min-height: 70vh;
   display: flex;
   flex-direction: column;
@@ -21,7 +22,7 @@
   /* names of the weekdays*/
   appearance: none;
   background: none;
-  width: 3em;
+  min-width: 2.5em;
   font-size: 1em;
   padding-left: 0.25em;
   padding-right: 0.25em;

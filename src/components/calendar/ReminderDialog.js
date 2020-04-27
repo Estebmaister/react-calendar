@@ -1,15 +1,14 @@
-import React from 'react';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import IconButton from '@material-ui/core/IconButton';
-import Avatar from '@material-ui/core/Avatar';
+import React from "react";
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import IconButton from "@material-ui/core/IconButton";
+import Avatar from "@material-ui/core/Avatar";
 
 export default class ReminderDialog extends React.Component {
-
   constructor(props) {
     super(props);
 
@@ -29,18 +28,18 @@ export default class ReminderDialog extends React.Component {
 
   componentWillReceiveProps = (nextProps) => {
     if (this.props.reminderTitle !== nextProps.reminderTitle) {
-      this.setState({ reminderTitle: nextProps.reminderTitle })
+      this.setState({ reminderTitle: nextProps.reminderTitle });
     }
     if (this.props.reminderCity !== nextProps.reminderCity) {
-      this.setState({ reminderCity: nextProps.reminderCity })
+      this.setState({ reminderCity: nextProps.reminderCity });
     }
     if (this.props.reminderStartTime !== nextProps.reminderStartTime) {
-      this.setState({ reminderStartTime: nextProps.reminderStartTime })
+      this.setState({ reminderStartTime: nextProps.reminderStartTime });
     }
     if (this.props.reminderCategory !== nextProps.reminderCategory) {
-      this.setState({ reminderCategory: nextProps.reminderCategory })
+      this.setState({ reminderCategory: nextProps.reminderCategory });
     }
-  }
+  };
 
   handleClickOpen = (event) => {
     this.setState({ open: true });
@@ -52,55 +51,57 @@ export default class ReminderDialog extends React.Component {
 
   onSubmit = (event) => {
     event.preventDefault();
-    this.props.handleSubmit(this.state)
+    this.props.handleSubmit(this.state);
     this.setState({
       reminderTitle: this.props.reminderTitle || "",
       reminderCity: this.props.reminderCity || "",
       reminderDate: this.props.reminderDate || "",
       reminderStartTime: this.props.reminderStartTime || "10:00:00",
       reminderCategory: this.props.reminderCategory || "home",
-    })
+    });
   };
 
   __handleTitleChange = (event) => {
     this.setState({
       reminderTitle: event.target.value,
     });
-  }
+  };
 
   __handleCityChange = (event) => {
     this.setState({
       reminderCity: event.target.value,
     });
-  }
+  };
 
   __handleDateChange = (event) => {
     this.setState({
       reminderDate: event.target.value,
     });
-  }
+  };
 
   __handleStartTimeChange = (event) => {
     this.setState({
       reminderStartTime: event.target.value,
     });
-  }
+  };
 
   __handleCategoryChange = (event) => {
     this.setState({
       reminderCategory: event.target.value,
     });
-  }
+  };
 
   render() {
     return (
       <div>
         <IconButton>
-          <Avatar onClick={this.handleClickOpen}>
-            {this.props.children}
-          </Avatar>
+          <Avatar onClick={this.handleClickOpen}>{this.props.children}</Avatar>
         </IconButton>
-        <Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
+        <Dialog
+          open={this.state.open}
+          onClose={this.handleClose}
+          aria-labelledby="form-dialog-title"
+        >
           <DialogTitle id="form-dialog-title">{this.props.action}</DialogTitle>
           <form onSubmit={this.onSubmit}>
             <DialogContent>
@@ -124,17 +125,19 @@ export default class ReminderDialog extends React.Component {
                 value={this.state.reminderCity}
                 fullWidth
               />
-              {this.props.showDateField && <TextField
-                InputLabelProps={{ shrink: true }}
-                autoFocus
-                margin="dense"
-                id="date"
-                label="Date"
-                type="date"
-                onChange={this.__handleDateChange}
-                value={this.state.reminderDate}
-                fullWidth
-              />}
+              {this.props.showDateField && (
+                <TextField
+                  InputLabelProps={{ shrink: true }}
+                  autoFocus
+                  margin="dense"
+                  id="date"
+                  label="Date"
+                  type="date"
+                  onChange={this.__handleDateChange}
+                  value={this.state.reminderDate}
+                  fullWidth
+                />
+              )}
               <TextField
                 InputLabelProps={{ shrink: true }}
                 autoFocus
@@ -160,7 +163,7 @@ export default class ReminderDialog extends React.Component {
             <DialogActions>
               <Button onClick={this.handleClose} color="primary">
                 Cancel
-          </Button>
+              </Button>
               <Button onClick={this.handleClose} type="submit" color="primary">
                 {this.props.submitText}
               </Button>
