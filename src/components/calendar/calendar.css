@@ -74,6 +74,8 @@
   width: 100%;
   height: 1.2em;
   display: inline-block;
+  overflow: hidden;
+  overflow: auto;
 }
 
 .reminds {

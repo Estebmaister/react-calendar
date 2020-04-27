@@ -8,6 +8,8 @@ import Day from "./Day.js";
 import ReminderDialog from "./ReminderDialog.js";
 import "./calendar.css";
 import "./icons.css";
+import TrashIcon from "./svgs/trash-alt.svg";
+import PlusIcon from "./svgs/plus.svg";
 
 export default class Calendar extends React.Component {
   constructor(props) {
@@ -202,12 +204,14 @@ export default class Calendar extends React.Component {
     return (
       <div className="calendar-container">
         <div className="calendar-navi">
-          <button className="month-change">{"< Prev"}</button>
+          <button className="month-change month-prev">{"Prev"}</button>
           <h2>
             <span className="calendar-label">{this.month()} </span>
             <span className="calendar-label">{this.year()} </span>
+            <img className="trash-icon" src={PlusIcon} alt="Delete all" />
+            <img className="trash-icon" src={TrashIcon} alt="Delete all" />
           </h2>
-          <button className="month-change">{"Next >"}</button>
+          <button className="month-change month-next">{"Next"}</button>
           <div className="icon-folder">
             <ReminderDialog
               action={"Add a new reminder"}
