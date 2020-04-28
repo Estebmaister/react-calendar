@@ -27,6 +27,7 @@ export default class Calendar extends React.Component {
       .format("D");
 
     // Binding the functions of the component
+    this.changeMonth = this.changeMonth.bind(this);
     this.currentDayF = this.currentDayF.bind(this);
     this.month = this.month.bind(this);
     this.year = this.year.bind(this);
@@ -116,6 +117,27 @@ export default class Calendar extends React.Component {
     return rows.map((day, index) => <tr key={"week" + index}>{day}</tr>);
   };
 
+  changeMonth = (e, change) => {
+    switch (change) {
+      case "NEXT":
+        this.setState({
+          dateObject: moment(this.state.dateObject).month(
+            this.state.dateObject.month() + 1
+          ),
+        });
+        break;
+      case "PREV":
+        this.setState({
+          dateObject: moment(this.state.dateObject).month(
+            this.state.dateObject.month() - 1
+          ),
+        });
+        break;
+      default:
+        break;
+    }
+  };
+
   sortAndUpdateRemindersIndexes = (arrayOfReminders) => {
     return this.updateRemindersIndexes(
       arrayOfReminders.sort(
@@ -199,7 +221,12 @@ export default class Calendar extends React.Component {
     return (
       <div className="calendar-container">
         <div className="calendar-navi">
-          <button className="month-change month-prev">{"Prev"}</button>
+          <button
+            className="month-change month-prev"
+            onClick={(e) => this.changeMonth(e, "PREV")}
+          >
+            {"Prev"}
+          </button>
           <h2>
             <span className="calendar-label">{this.month()} </span>
             <span className="calendar-label">{this.year()} </span>
@@ -218,7 +245,12 @@ export default class Calendar extends React.Component {
               onClick={this.deleteAllReminders}
             />
           </div>
-          <button className="month-change month-next">{"Next"}</button>
+          <button
+            onClick={(e) => this.changeMonth(e, "NEXT")}
+            className="month-change month-next"
+          >
+            {"Next"}
+          </button>
         </div>
         <table style={{ width: "100%" }}>
           <thead className="">
