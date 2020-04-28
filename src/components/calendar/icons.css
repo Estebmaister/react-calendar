@@ -1,12 +1,3 @@
-.calendar-navi {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  height: 3em;
-  width: 100%;
-}
-
 .month-change {
   display: block;
   padding: 0 1em;
@@ -30,81 +21,83 @@
 }
 
 .trash-icon,
-.plus-icon {
+.form-icon {
+  display: block;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.form-icon-img {
+  display: block;
+  height: 100%;
+  width: 100%;
+  background: center no-repeat;
+  background-image: url("data:image/svg+xml,%3Csvg fill='%23fff' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'%3E%3Cpath d='M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z'/%3E%3C/svg%3E");
+}
+
+.nav-icon {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.nav-icon .trash-icon,
+.nav-icon .form-icon {
   height: 0.7rem;
   width: 0.7rem;
   padding: 0.4rem;
-  background-color: rgb(112, 76, 182);
-  display: inline-block;
-  border-radius: 50%;
-  cursor: pointer;
   margin: 0.2rem;
+  background-color: rgb(112, 76, 182);
 }
-
-.trash-icon:hover,
-.plus-icon:hover {
+.nav-icon .trash-icon:hover,
+.nav-icon .form-icon:hover {
   padding: 0.5rem;
   margin: 0.1rem;
 }
 
-.plus-day,
-.trash-day {
-  background-color: rgb(11, 176, 182);
-  height: 0.6rem;
-  width: 0.6rem;
-  padding: 0.25rem;
-  margin: 0.05rem;
-}
-
-.trash-day:hover,
-.plus-day:hover {
-  padding: 0.3rem;
-  margin: 0rem;
-}
-
-.trash-remind {
-  background-color: transparent;
-  height: 0.5rem;
-  width: 0.5rem;
-  padding: 0.1rem 0.2rem;
-  margin: 0rem;
-}
-
-.trash-remind:hover {
-  padding: 0.1rem 0.2rem;
-  margin: 0rem;
-}
-
-.icon-folder {
+.day-icon {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
   align-items: center;
+  justify-content: flex-end;
+}
+.day-icon .trash-icon,
+.day-icon .form-icon {
+  height: 0.6rem;
+  width: 0.6rem;
+  padding: 0.25rem;
+  margin: 0.05rem;
+  background-color: rgb(11, 176, 182);
+}
+.day-icon .trash-icon:hover,
+.day-icon .form-icon:hover {
+  padding: 0.3rem;
+  margin: 0rem;
 }
 
-p .icon-folder .plus-icon {
-  src: none;
-  background-color: transparent;
+.text-reminder .trash-icon,
+.text-reminder .form-icon {
   height: 0.5rem;
   width: 0.5rem;
   padding: 0.1rem 0.2rem;
   margin: 0rem;
+  background-color: transparent;
+  border-radius: 0;
 }
-p .icon-folder .plus-icon:hover {
-  padding: 0.1rem 0.2rem;
-  margin: 0rem;
+.text-reminder .trash-icon:hover,
+.text-reminder .form-icon:hover {
+  height: 0.4rem;
+  width: 0.4rem;
+  padding: 0.15rem 0.25rem;
+}
+.text-reminder .form-icon-img {
+  background-image: url("data:image/svg+xml,%3Csvg fill='%23fff' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath d='M290.74 93.24l128.02 128.02-277.99 277.99-114.14 12.6C11.35 513.54-1.56 500.62.14 485.34l12.7-114.22 277.9-277.88zm207.2-19.06l-60.11-60.11c-18.75-18.75-49.16-18.75-67.91 0l-56.55 56.55 128.02 128.02 56.55-56.55c18.75-18.76 18.75-49.16 0-67.91z'/%3E%3C/svg%3E");
 }
 
-.calendar-navi .icon-folder .plus-icon {
-  height: 0.7rem;
-  width: 0.7rem;
-  padding: 0.4rem;
-  background-color: rgb(112, 76, 182);
-  display: inline-block;
-  cursor: pointer;
-  margin: 0.2rem;
-}
-.calendar-navi .icon-folder .plus-icon:hover {
-  padding: 0.5rem;
-  margin: 0.1rem;
+.form-folder {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
 }

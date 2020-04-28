@@ -22,11 +22,9 @@ export default class Calendar extends React.Component {
         {day}
       </th>
     ));
-    this.lastDayOfMonth = moment(this.state.dateObject)
-      .endOf("month")
-      .format("D");
 
     // Binding the functions of the component
+    this.lastDayOfMonth = this.lastDayOfMonth.bind(this);
     this.changeMonth = this.changeMonth.bind(this);
     this.currentDayF = this.currentDayF.bind(this);
     this.month = this.month.bind(this);
@@ -38,6 +36,9 @@ export default class Calendar extends React.Component {
     this.onDayClick = this.onDayClick.bind(this);
     this.deleteAllReminders = this.deleteAllReminders.bind(this);
   }
+
+  lastDayOfMonth = () =>
+    moment(this.state.dateObject).endOf("month").format("D");
 
   currentDayF = () => parseInt(this.state.dateObject.format("D"));
 
@@ -66,15 +67,18 @@ export default class Calendar extends React.Component {
 
   makeDays = () => {
     let daysInMonth = [];
-    for (let day = 1; day <= this.lastDayOfMonth; day++) {
-      let fullDate = moment({ day: day }).format("YYYY-MM-DD");
+    for (let day = 1; day <= this.lastDayOfMonth(); day++) {
+      let fullDate = moment({
+        day: day,
+        month: this.state.dateObject.month(),
+      }).format("YYYY-MM-DD");
       daysInMonth.push(
         <Day
           key={"day" + day}
           day={day}
           currentDay={day === this.state.selectedDay ? "today" : ""}
           onDayClick={this.onDayClick}
-          fullDate={moment({ day: day })}
+          fullDate={moment({ day: day, month: this.state.dateObject.month() })}
           addReminder={this.addReminder}
           editReminder={this.editReminder}
           deleteReminder={this.deleteReminder}
@@ -231,7 +235,7 @@ export default class Calendar extends React.Component {
             <span className="calendar-label">{this.month()} </span>
             <span className="calendar-label">{this.year()} </span>
           </h2>
-          <div className="icon-folder">
+          <div className="nav-icon">
             <ReminderDialog
               action={"Add a new reminder"}
               showDateField={true}

@@ -8,6 +8,15 @@
   font-size: calc(10px + 2vmin);
 }
 
+.calendar-navi {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  max-height: 4em;
+  width: 100%;
+}
+
 .row {
   display: flex;
   flex-direction: row;
@@ -20,7 +29,6 @@
 }
 
 .week-day {
-  /* names of the weekdays*/
   appearance: none;
   background: none;
   min-width: 2.5em;
@@ -117,17 +125,6 @@
   background-color: rgba(128, 206, 237, 0.637);
 }
 
-.dlt-butt {
-  background-color: #555;
-  border: 1px solid transparent;
-  color: white;
-  text-transform: uppercase;
-  padding: 0.45em;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-}
-
 p.text-reminder {
   margin: 1px 0;
   white-space: nowrap;
@@ -152,41 +149,13 @@ p.text-reminder {
   text-decoration: none;
   display: inline-block;
   font-size: 0.8em;
-  margin: 2px auto;
+  margin: 2px 0.5px;
   transition-duration: 0.4s;
   cursor: pointer;
 }
 
 .forecast-button:hover {
   background-color: #555555;
-  color: white;
-}
-
-div.makeStyles-paper-1 {
-  background-color: transparent;
-}
-
-.form-reminder {
-  border-radius: 1em;
-  background-color: rgba(111, 76, 182, 0.514);
-  padding: 0.7em;
-}
-
-.form-reminder input {
-  width: 97%;
-  margin: 1px;
-}
-
-.form-reminder select {
-  width: 99%;
-  margin: 0.1em;
-}
-
-.form-reminder button {
-  border-radius: 0.5em;
-  border-color: transparent;
-  margin-left: 1px;
-  background-color: rgb(112, 76, 182);
   color: white;
 }
 

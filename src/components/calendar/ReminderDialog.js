@@ -95,13 +95,15 @@ export default class ReminderDialog extends React.Component {
 
   render() {
     return (
-      <div className="icon-folder">
-        <img
-          className="plus-icon plus-day"
+      <div className="form-folder">
+        <div
+          className="form-icon"
           src={PlusIcon}
           alt="Add/edit reminder"
           onClick={this.handleClickOpen}
-        />
+        >
+          <i className="form-icon-img"></i>
+        </div>
         <Dialog
           open={this.state.open}
           onClose={this.handleClose}

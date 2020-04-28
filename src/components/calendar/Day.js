@@ -54,23 +54,25 @@ export default class Day extends React.Component {
       >
         <span key={"sDay" + this.props.day} className="spanDay">
           {this.state.day}
-          {reminders && (
-            <img
-              className="trash-icon trash-day"
-              src={TrashIcon}
-              alt="Delete all"
-              onClick={(e) =>
-                this.props.deleteAllReminders(this.state.formatedFullDate)
-              }
-            />
-          )}
-          <ReminderDialog
-            classes={{ root: "modal-container" }}
-            action={`Add a new reminder on ${this.state.formatedFullDate}`}
-            showDateField={false}
-            submitText={"Add reminder"}
-            handleSubmit={this.addReminder}
-          ></ReminderDialog>
+          <div className="day-icon">
+            {reminders && (
+              <img
+                className="trash-icon trash-day"
+                src={TrashIcon}
+                alt="Delete all"
+                onClick={(e) =>
+                  this.props.deleteAllReminders(this.state.formatedFullDate)
+                }
+              />
+            )}
+            <ReminderDialog
+              classes={{ root: "modal-container" }}
+              action={`Add a new reminder on ${this.state.formatedFullDate}`}
+              showDateField={false}
+              submitText={"Add reminder"}
+              handleSubmit={this.addReminder}
+            ></ReminderDialog>
+          </div>
         </span>
 
         <div className="reminds">
