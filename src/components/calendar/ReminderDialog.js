@@ -5,8 +5,10 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import IconButton from "@material-ui/core/IconButton";
-import Avatar from "@material-ui/core/Avatar";
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import PlusIcon from "./svgs/plus.svg";
+import { Select } from "@material-ui/core";
 
 export default class ReminderDialog extends React.Component {
   constructor(props) {
@@ -93,10 +95,13 @@ export default class ReminderDialog extends React.Component {
 
   render() {
     return (
-      <div>
-        <IconButton>
-          <Avatar onClick={this.handleClickOpen}>{this.props.children}</Avatar>
-        </IconButton>
+      <div className="icon-folder">
+        <img
+          className="plus-icon plus-day"
+          src={PlusIcon}
+          alt="Add/edit reminder"
+          onClick={this.handleClickOpen}
+        />
         <Dialog
           open={this.state.open}
           onClose={this.handleClose}
@@ -117,6 +122,7 @@ export default class ReminderDialog extends React.Component {
               />
               <TextField
                 autoFocus
+                placeholder="Bogota"
                 margin="dense"
                 id="city"
                 label="Location (city)"
@@ -129,6 +135,7 @@ export default class ReminderDialog extends React.Component {
                 <TextField
                   InputLabelProps={{ shrink: true }}
                   autoFocus
+                  maxLength="30"
                   margin="dense"
                   id="date"
                   label="Date"
@@ -149,16 +156,21 @@ export default class ReminderDialog extends React.Component {
                 value={this.state.reminderStartTime}
                 fullWidth
               />
-              <TextField
+              <InputLabel id="category-label">Category (color)</InputLabel>
+              <Select
                 autoFocus
-                margin="dense"
+                placeholder="work"
                 id="category"
-                label="Category"
-                type="text"
+                labelId="category-label"
+                displayEmpty
                 onChange={this.__handleCategoryChange}
                 value={this.state.reminderCategory}
                 fullWidth
-              />
+              >
+                <MenuItem value="work">Work</MenuItem>
+                <MenuItem value="home">Home</MenuItem>
+                <MenuItem value="calendar">Calendar</MenuItem>
+              </Select>
             </DialogContent>
             <DialogActions>
               <Button onClick={this.handleClose} color="primary">

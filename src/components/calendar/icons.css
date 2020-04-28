@@ -1,7 +1,7 @@
 .calendar-navi {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   height: 3em;
   width: 100%;
@@ -29,24 +29,82 @@
   background-image: url("data:image/svg+xml,%3Csvg fill='%236f4cb6' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath d='M256 504C119 504 8 393 8 256S119 8 256 8s248 111 248 248-111 248-248 248zm116-292H256v-70.9c0-10.7-13-16.1-20.5-8.5L121.2 247.5c-4.7 4.7-4.7 12.2 0 16.9l114.3 114.9c7.6 7.6 20.5 2.2 20.5-8.5V300h116c6.6 0 12-5.4 12-12v-64c0-6.6-5.4-12-12-12z'/%3E%3C/svg%3E");
 }
 
+.trash-icon,
+.plus-icon {
+  height: 0.7rem;
+  width: 0.7rem;
+  padding: 0.4rem;
+  background-color: rgb(112, 76, 182);
+  display: inline-block;
+  border-radius: 50%;
+  cursor: pointer;
+  margin: 0.2rem;
+}
+
+.trash-icon:hover,
+.plus-icon:hover {
+  padding: 0.5rem;
+  margin: 0.1rem;
+}
+
+.plus-day,
+.trash-day {
+  background-color: rgb(11, 176, 182);
+  height: 0.6rem;
+  width: 0.6rem;
+  padding: 0.25rem;
+  margin: 0.05rem;
+}
+
+.trash-day:hover,
+.plus-day:hover {
+  padding: 0.3rem;
+  margin: 0rem;
+}
+
+.trash-remind {
+  background-color: transparent;
+  height: 0.5rem;
+  width: 0.5rem;
+  padding: 0.1rem 0.2rem;
+  margin: 0rem;
+}
+
+.trash-remind:hover {
+  padding: 0.1rem 0.2rem;
+  margin: 0rem;
+}
+
 .icon-folder {
   display: flex;
   flex-direction: row;
+  flex-wrap: nowrap;
   align-items: center;
-  height: 10px;
-  border: 2px solid red;
 }
 
-.trash-icon {
-  height: 0.4em;
-  padding: 0.2em;
+p .icon-folder .plus-icon {
+  src: none;
+  background-color: transparent;
+  height: 0.5rem;
+  width: 0.5rem;
+  padding: 0.1rem 0.2rem;
+  margin: 0rem;
+}
+p .icon-folder .plus-icon:hover {
+  padding: 0.1rem 0.2rem;
+  margin: 0rem;
+}
+
+.calendar-navi .icon-folder .plus-icon {
+  height: 0.7rem;
+  width: 0.7rem;
+  padding: 0.4rem;
   background-color: rgb(112, 76, 182);
   display: inline-block;
-  border-radius: 5px;
   cursor: pointer;
-  margin: 0 0.1em;
+  margin: 0.2rem;
 }
-
-.trash-icon:hover {
-  padding: 0.3em 0.2em;
+.calendar-navi .icon-folder .plus-icon:hover {
+  padding: 0.5rem;
+  margin: 0.1rem;
 }

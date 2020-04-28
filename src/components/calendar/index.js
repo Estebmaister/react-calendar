@@ -1,15 +1,10 @@
 import React from "react";
 import moment from "moment";
-import Avatar from "@material-ui/core/Avatar";
-import IconButton from "@material-ui/core/IconButton";
-import AddIcon from "@material-ui/icons/Add";
-import DeleteIcon from "@material-ui/icons/Delete";
 import Day from "./Day.js";
 import ReminderDialog from "./ReminderDialog.js";
 import "./calendar.css";
 import "./icons.css";
 import TrashIcon from "./svgs/trash-alt.svg";
-import PlusIcon from "./svgs/plus.svg";
 
 export default class Calendar extends React.Component {
   constructor(props) {
@@ -208,25 +203,22 @@ export default class Calendar extends React.Component {
           <h2>
             <span className="calendar-label">{this.month()} </span>
             <span className="calendar-label">{this.year()} </span>
-            <img className="trash-icon" src={PlusIcon} alt="Delete all" />
-            <img className="trash-icon" src={TrashIcon} alt="Delete all" />
           </h2>
-          <button className="month-change month-next">{"Next"}</button>
           <div className="icon-folder">
             <ReminderDialog
               action={"Add a new reminder"}
               showDateField={true}
               submitText={"Add reminder"}
               handleSubmit={this.addGlobalReminder}
-            >
-              <AddIcon />
-            </ReminderDialog>
-            <IconButton onClick={this.deleteAllReminders}>
-              <Avatar>
-                <DeleteIcon />
-              </Avatar>
-            </IconButton>
+            ></ReminderDialog>
+            <img
+              className="trash-icon"
+              src={TrashIcon}
+              alt="Delete all"
+              onClick={this.deleteAllReminders}
+            />
           </div>
+          <button className="month-change month-next">{"Next"}</button>
         </div>
         <table style={{ width: "100%" }}>
           <thead className="">

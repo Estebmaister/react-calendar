@@ -1,10 +1,7 @@
 import React from "react";
-import Avatar from "@material-ui/core/Avatar";
-import AddIcon from "@material-ui/icons/Add";
-import EditIcon from "@material-ui/icons/Edit";
-import DeleteIcon from "@material-ui/icons/Delete";
 import Forecast from "./Forecast.js";
 import ReminderDialog from "./ReminderDialog.js";
+import TrashIcon from "./svgs/trash-alt.svg";
 
 export default class Day extends React.Component {
   constructor(props) {
@@ -58,35 +55,40 @@ export default class Day extends React.Component {
         <span key={"sDay" + this.props.day} className="spanDay">
           {this.state.day}
           {reminders && (
-            <Avatar
-              className="trash-icon"
+            <img
+              className="trash-icon trash-day"
+              src={TrashIcon}
+              alt="Delete all"
               onClick={(e) =>
                 this.props.deleteAllReminders(this.state.formatedFullDate)
               }
-            >
-              <DeleteIcon />
-            </Avatar>
+            />
           )}
           <ReminderDialog
+            classes={{ root: "modal-container" }}
             action={`Add a new reminder on ${this.state.formatedFullDate}`}
             showDateField={false}
             submitText={"Add reminder"}
             handleSubmit={this.addReminder}
-          >
-            <AddIcon />
-          </ReminderDialog>
+          ></ReminderDialog>
         </span>
 
         <div className="reminds">
           {reminders &&
             reminders.map((reminder) => (
               <span className={"spanRemind " + reminder.category}>
-                <p className={"text-reminder"}>
-                  <Avatar onClick={(e) => this.deleteReminder(reminder)}>
-                    <DeleteIcon />
-                  </Avatar>
+                <p className="text-reminder">
+                  <img
+                    className="trash-icon trash-remind"
+                    src={TrashIcon}
+                    alt="Delete all"
+                    onClick={(e) => this.deleteReminder(reminder)}
+                  />
                   {String(reminder.title)}
+                </p>
+                <p className="text-reminder">
                   <ReminderDialog
+                    style={{ height: "10px" }}
                     action={`Edit reminder`}
                     showDateField={true}
                     submitText={"Update reminder"}
@@ -96,18 +98,14 @@ export default class Day extends React.Component {
                     reminderDate={reminder.date}
                     reminderStartTime={reminder.startTime}
                     reminderCategory={reminder.category}
-                  >
-                    <EditIcon />
-                  </ReminderDialog>
+                  ></ReminderDialog>
+                  {String(reminder.city)}{" "}
                 </p>
-                {String(reminder.city)}{" "}
                 <Forecast
                   city={reminder.city}
                   date={this.state.formatedFullDate}
                 />
-                <br />
-                {String(reminder.startTime)}
-                <br />
+                <p className="text-reminder">{String(reminder.startTime)}</p>
               </span>
             ))}
         </div>

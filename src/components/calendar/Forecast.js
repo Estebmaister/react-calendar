@@ -22,11 +22,11 @@ export default function Forecast(props) {
       });
   }
   return (
-    <span style={{ fontSize: "0.7em" }}>
+    <div className="forecast-div" style={{ fontSize: "0.7em" }}>
       <Conditions responseObj={responseObj} />
       <button className="forecast-button" type="button" onClick={getForecast}>
         UD WEA Forecast
       </button>
-    </span>
+    </div>
   );
 }
