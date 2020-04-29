@@ -1,12 +1,17 @@
-import { createStore } from "redux";
-import { combineReducers } from "redux";
-import dateObject from "./reducers/dateObject";
-import reminder from "./reducers/reminder";
+import { createStore, combineReducers, applyMiddleware } from "redux";
+import { composeWithDevTools } from "redux-devtools-extension";
+import { logger } from "redux-logger";
+import initialDate from "./reducers/initialDate";
+import reminders from "./reducers/reminders";
 
 const rootReducer = combineReducers({
-  dateObject,
-  reminder,
+  initialDate,
+  reminders,
 });
 
-const store = createStore(rootReducer);
+const store = createStore(
+  rootReducer,
+  composeWithDevTools(applyMiddleware(logger))
+);
+
 export default store;

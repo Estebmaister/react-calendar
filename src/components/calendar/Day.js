@@ -3,6 +3,8 @@ import Forecast from "./Forecast.js";
 import ReminderDialog from "./ReminderDialog.js";
 import TrashIcon from "./svgs/trash-alt.svg";
 
+// import { connect } from "react-redux";
+
 export default class Day extends React.Component {
   constructor(props) {
     super(props);
@@ -15,6 +17,23 @@ export default class Day extends React.Component {
     this.onClick = this.onClick.bind(this);
     this.addReminder = this.addReminder.bind(this);
   }
+  /*componentWillReceiveProps(nProps) {
+    if (nProps.fullDate !== this.props.fullDate) {
+      this.setState({
+        formatedFullDate: this.props.fullDate.format("YYYY-MM-DD"),
+      });
+    }
+  }
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (
+      prevState.formatedFullDate !== nextProps.fullDate.format("YYYY-MM-DD")
+    ) {
+      return {
+        formatedFullDate: nextProps.fullDate.format("YYYY-MM-DD"),
+      };
+    }
+    return null;
+  }*/
 
   onClick = (event) => {
     this.props.onDayClick(event, this.state.day);
@@ -115,3 +134,9 @@ export default class Day extends React.Component {
     );
   }
 }
+
+// const mapStateToProps = (state) => {
+//   return { ...state };
+// };
+
+// export default Day = connect(mapStateToProps)(Day);
