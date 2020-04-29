@@ -144,7 +144,7 @@ body {
   background-color: rgba(128, 206, 237, 0.637);
 }
 
-p.text-reminder {
+.text-reminder {
   margin: 1px 0;
   white-space: nowrap;
   max-width: 90%;

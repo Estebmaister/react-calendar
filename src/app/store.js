@@ -4,7 +4,7 @@ import { logger } from "redux-logger";
 import initialDate from "./reducers/initialDate";
 import reminders from "./reducers/reminders";
 
-const rootReducer = combineReducers({
+export const rootReducer = combineReducers({
   initialDate,
   reminders,
 });

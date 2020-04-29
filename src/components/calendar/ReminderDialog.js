@@ -20,28 +20,13 @@ export default class ReminderDialog extends React.Component {
       reminderCity: props.reminderCity || "",
       reminderDate: props.reminderDate || "",
       reminderStartTime: props.reminderStartTime || "10:00",
-      reminderCategory: props.reminderCategory || "home",
+      reminderCategory: props.reminderCategory || "work",
     };
 
     this.handleClickOpen = this.handleClickOpen.bind(this);
     this.handleClose = this.handleClose.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
-
-  componentWillReceiveProps = (nextProps) => {
-    if (this.props.reminderTitle !== nextProps.reminderTitle) {
-      this.setState({ reminderTitle: nextProps.reminderTitle });
-    }
-    if (this.props.reminderCity !== nextProps.reminderCity) {
-      this.setState({ reminderCity: nextProps.reminderCity });
-    }
-    if (this.props.reminderStartTime !== nextProps.reminderStartTime) {
-      this.setState({ reminderStartTime: nextProps.reminderStartTime });
-    }
-    if (this.props.reminderCategory !== nextProps.reminderCategory) {
-      this.setState({ reminderCategory: nextProps.reminderCategory });
-    }
-  };
 
   handleClickOpen = (event) => {
     this.setState({ open: true });
@@ -59,7 +44,7 @@ export default class ReminderDialog extends React.Component {
       reminderCity: this.props.reminderCity || "",
       reminderDate: this.props.reminderDate || "",
       reminderStartTime: this.props.reminderStartTime || "10:00",
-      reminderCategory: this.props.reminderCategory || "home",
+      reminderCategory: this.props.reminderCategory || "work",
     });
   };
 

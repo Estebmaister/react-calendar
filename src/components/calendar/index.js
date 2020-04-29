@@ -9,19 +9,10 @@ import TrashIcon from "./svgs/trash-alt.svg";
 class Calendar extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       dateNow: moment(),
       selectedDay: moment().date(),
-      reminders: props.reminders,
     };
-
-    this.weekdaysShortName = moment.weekdaysShort().map((day) => (
-      <th key={day} className="week-day">
-        {day}
-      </th>
-    ));
-
     // Binding the functions of the component
     this.lastDayOfMonth = this.lastDayOfMonth.bind(this);
     this.changeMonth = this.changeMonth.bind(this);
@@ -35,6 +26,11 @@ class Calendar extends React.Component {
     this.onDayClick = this.onDayClick.bind(this);
     this.deleteAllReminders = this.deleteAllReminders.bind(this);
   }
+  weekdaysShortName = moment.weekdaysShort().map((day) => (
+    <th key={day} className="week-day">
+      {day}
+    </th>
+  ));
 
   lastDayOfMonth = () =>
     moment(this.props.initialDate).endOf("month").format("D");
@@ -268,7 +264,5 @@ class Calendar extends React.Component {
     );
   }
 }
-
-
 
 export default Calendar;

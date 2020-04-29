@@ -6,7 +6,7 @@ import {
   DELETE_ALL_DAY_REMINDERS,
 } from "../actions";
 
-export default function reminder(state = {}, action) {
+export default function reminders(state = {}, action) {
   switch (action.type) {
     case ADD_REMINDER:
     case DELETE_REMINDER:
@@ -14,8 +14,8 @@ export default function reminder(state = {}, action) {
     case EDIT_REMINDER:
       return {
         ...state,
-        payload: action.payload,
-      }
+        reminders: action.payload,
+      };
     case DELETE_ALL_REMINDERS:
       return action.payload;
     default:
