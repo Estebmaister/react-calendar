@@ -1,22 +1,24 @@
 {
   "files": {
-    "main.css": "/react-calendar/static/css/main.d798a027.chunk.css",
-    "main.js": "/react-calendar/static/js/main.9d5995e5.chunk.js",
-    "main.js.map": "/react-calendar/static/js/main.9d5995e5.chunk.js.map",
-    "runtime-main.js": "/react-calendar/static/js/runtime-main.bb7a62b1.js",
-    "runtime-main.js.map": "/react-calendar/static/js/runtime-main.bb7a62b1.js.map",
-    "static/js/2.960ce514.chunk.js": "/react-calendar/static/js/2.960ce514.chunk.js",
-    "static/js/2.960ce514.chunk.js.map": "/react-calendar/static/js/2.960ce514.chunk.js.map",
+    "main.css": "/react-calendar/static/css/main.8c48279e.chunk.css",
+    "main.js": "/react-calendar/static/js/main.9c14d3b9.chunk.js",
+    "main.js.map": "/react-calendar/static/js/main.9c14d3b9.chunk.js.map",
+    "runtime-main.js": "/react-calendar/static/js/runtime-main.7e8b63bb.js",
+    "runtime-main.js.map": "/react-calendar/static/js/runtime-main.7e8b63bb.js.map",
+    "static/js/2.345e05b5.chunk.js": "/react-calendar/static/js/2.345e05b5.chunk.js",
+    "static/js/2.345e05b5.chunk.js.map": "/react-calendar/static/js/2.345e05b5.chunk.js.map",
     "index.html": "/react-calendar/index.html",
-    "precache-manifest.6ca1f661ec063fae6bece9dff8b9172f.js": "/react-calendar/precache-manifest.6ca1f661ec063fae6bece9dff8b9172f.js",
+    "precache-manifest.e50fe058e75387aaa2976033cc621613.js": "/react-calendar/precache-manifest.e50fe058e75387aaa2976033cc621613.js",
     "service-worker.js": "/react-calendar/service-worker.js",
-    "static/css/main.d798a027.chunk.css.map": "/react-calendar/static/css/main.d798a027.chunk.css.map",
-    "static/js/2.960ce514.chunk.js.LICENSE.txt": "/react-calendar/static/js/2.960ce514.chunk.js.LICENSE.txt"
+    "static/css/main.8c48279e.chunk.css.map": "/react-calendar/static/css/main.8c48279e.chunk.css.map",
+    "static/js/2.345e05b5.chunk.js.LICENSE.txt": "/react-calendar/static/js/2.345e05b5.chunk.js.LICENSE.txt",
+    "static/media/plus.svg": "/react-calendar/static/media/plus.5c8724f8.svg",
+    "static/media/trash-alt.svg": "/react-calendar/static/media/trash-alt.1ee190f0.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.bb7a62b1.js",
-    "static/js/2.960ce514.chunk.js",
-    "static/css/main.d798a027.chunk.css",
-    "static/js/main.9d5995e5.chunk.js"
+    "static/js/runtime-main.7e8b63bb.js",
+    "static/js/2.345e05b5.chunk.js",
+    "static/css/main.8c48279e.chunk.css",
+    "static/js/main.9c14d3b9.chunk.js"
   ]
 }
