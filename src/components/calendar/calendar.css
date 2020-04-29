@@ -26,6 +26,15 @@ body {
   max-height: 4em;
   width: 100%;
 }
+.calendar-navi h2 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+.calendar-label {
+  margin: auto 5px;
+}
 
 .row {
   display: flex;
