@@ -4,9 +4,7 @@ import { connect } from "react-redux";
 import * as actions from "./app/actions";
 
 // ----------- Redux configuration
-const mapStateToProps = (state) => {
-  return { ...state };
-};
+const mapStateToProps = (state) => ({ ...state });
 
 const mapDispatchToProps = (dispatch) => {
   return {

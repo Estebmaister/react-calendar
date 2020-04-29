@@ -10,9 +10,13 @@ export default function reminder(state = {}, action) {
   switch (action.type) {
     case ADD_REMINDER:
     case DELETE_REMINDER:
-    case DELETE_ALL_REMINDERS:
     case DELETE_ALL_DAY_REMINDERS:
     case EDIT_REMINDER:
+      return {
+        ...state,
+        payload: action.payload,
+      }
+    case DELETE_ALL_REMINDERS:
       return action.payload;
     default:
       return state;

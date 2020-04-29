@@ -1,5 +1,4 @@
 import React from "react";
-import { connect } from "react-redux";
 import moment from "moment";
 import Day from "./Day.js";
 import ReminderDialog from "./ReminderDialog.js";
@@ -14,7 +13,7 @@ class Calendar extends React.Component {
     this.state = {
       dateNow: moment(),
       selectedDay: moment().date(),
-      reminders: {},
+      reminders: props.reminders,
     };
 
     this.weekdaysShortName = moment.weekdaysShort().map((day) => (
@@ -70,21 +69,21 @@ class Calendar extends React.Component {
     for (let day = 1; day <= this.lastDayOfMonth(); day++) {
       let fullDate = moment({
         day: day,
-        month: this.state.dateNow.month(),
+        month: moment().month(),
       }).format("YYYY-MM-DD");
       daysInMonth.push(
         <Day
           key={"day" + day}
           day={day}
-          month={this.state.dateNow.month()}
-          currentDay={day === this.state.selectedDay ? "today" : ""}
+          month={moment().month()}
+          currentDay={day === 2 ? "today" : ""}
           onDayClick={this.onDayClick}
-          fullDate={moment({ day: day, month: this.state.dateNow.month() })}
+          fullDate={moment({ day: day, month: moment().month() })}
           addReminder={this.addReminder}
           editReminder={this.editReminder}
           deleteReminder={this.deleteReminder}
           deleteAllReminders={this.deleteAllDayReminders}
-          remindersUp={this.props.reminders[fullDate]}
+          reminders={this.props.reminders[fullDate]}
         />
       );
     }
@@ -184,8 +183,8 @@ class Calendar extends React.Component {
   editReminder = (fullDate, index, newReminder) => {
     // If date was changed
     if (fullDate !== newReminder.date) {
-      this.deleteReminder(fullDate, index);
       this.addReminder(newReminder.date, newReminder);
+      this.deleteReminder(fullDate, index);
     } else {
       let newReminders = this.props.reminders;
       let arrayOfReminders = newReminders[fullDate];
@@ -270,4 +269,6 @@ class Calendar extends React.Component {
   }
 }
 
-export default connect()(Calendar);
+
+
+export default Calendar;
