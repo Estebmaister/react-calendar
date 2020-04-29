@@ -19,7 +19,7 @@ export default class ReminderDialog extends React.Component {
       reminderTitle: props.reminderTitle || "",
       reminderCity: props.reminderCity || "",
       reminderDate: props.reminderDate || "",
-      reminderStartTime: props.reminderStartTime || "10:00:00",
+      reminderStartTime: props.reminderStartTime || "10:00",
       reminderCategory: props.reminderCategory || "home",
     };
 
@@ -58,7 +58,7 @@ export default class ReminderDialog extends React.Component {
       reminderTitle: this.props.reminderTitle || "",
       reminderCity: this.props.reminderCity || "",
       reminderDate: this.props.reminderDate || "",
-      reminderStartTime: this.props.reminderStartTime || "10:00:00",
+      reminderStartTime: this.props.reminderStartTime || "10:00",
       reminderCategory: this.props.reminderCategory || "home",
     });
   };

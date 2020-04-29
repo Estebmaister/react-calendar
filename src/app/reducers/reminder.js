@@ -1,32 +1,18 @@
-import { combineReducers } from "redux";
 import {
   ADD_REMINDER,
   EDIT_REMINDER,
   DELETE_REMINDER,
   DELETE_ALL_REMINDER,
-  NEXT_MONTH,
-  PREV_MONTH,
-} from "./actions";
+} from "../actions/";
 
-function dateObject(state = {}, action) {
-  switch (action.type) {
-    case NEXT_MONTH:
-      return action.change;
-    case PREV_MONTH:
-      return action.change;
-    default:
-      return state;
-  }
-}
-
-function reminder(state = [], action) {
+export default function reminder(state = [], action) {
   switch (action.type) {
     case ADD_REMINDER:
-      return [...state, { reminder: action.reminder }];
+      return [...state, { reminders: action.reminders }];
     case DELETE_REMINDER:
-      return [...state, { reminder: action.reminder }];
+      return [...state, { reminders: action.reminders }];
     case DELETE_ALL_REMINDER:
-      return [...state, { reminder: action.reminder }];
+      return [...state, { reminders: action.reminders }];
     case EDIT_REMINDER:
       return state.map((reminder, index) => {
         if (index === action.index) {
@@ -44,10 +30,3 @@ function reminder(state = [], action) {
       return state;
   }
 }
-
-const calendarApp = combineReducers({
-  dateObject,
-  reminder,
-});
-
-export default calendarApp;

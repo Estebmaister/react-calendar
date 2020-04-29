@@ -1,3 +1,9 @@
+body {
+  margin: 0;
+  padding: 1px;
+  font-family: monospace;
+}
+
 .calendar-container {
   width: 100%;
   min-height: 70vh;
@@ -130,7 +136,7 @@ p.text-reminder {
   white-space: nowrap;
   max-width: 90%;
   overflow: auto;
-  display: inline-flex;
+  display: flex;
   align-items: center;
 }
 .forecast-div {

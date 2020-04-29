@@ -11,7 +11,7 @@ export default class Calendar extends React.Component {
     super(props);
 
     this.state = {
-      dateObject: moment(),
+      initialDate: moment(),
       allMonths: moment.months(),
       selectedDay: moment().date(),
       reminders: {},
@@ -38,16 +38,16 @@ export default class Calendar extends React.Component {
   }
 
   lastDayOfMonth = () =>
-    moment(this.state.dateObject).endOf("month").format("D");
+    moment(this.state.initialDate).endOf("month").format("D");
 
-  currentDayF = () => parseInt(this.state.dateObject.format("D"));
+  currentDayF = () => parseInt(this.state.initialDate.format("D"));
 
-  month = () => this.state.dateObject.format("MMMM");
+  month = () => this.state.initialDate.format("MMMM");
 
-  year = () => this.state.dateObject.format("Y");
+  year = () => this.state.initialDate.format("Y");
 
   firstDayOfMonth = () =>
-    moment(this.state.dateObject).startOf("month").format("d");
+    moment(this.state.initialDate).startOf("month").format("d");
 
   makeBlanks = () => {
     let blanks = [];
@@ -70,7 +70,7 @@ export default class Calendar extends React.Component {
     for (let day = 1; day <= this.lastDayOfMonth(); day++) {
       let fullDate = moment({
         day: day,
-        month: this.state.dateObject.month(),
+        month: this.state.initialDate.month(),
       }).format("YYYY-MM-DD");
       daysInMonth.push(
         <Day
@@ -78,7 +78,7 @@ export default class Calendar extends React.Component {
           day={day}
           currentDay={day === this.state.selectedDay ? "today" : ""}
           onDayClick={this.onDayClick}
-          fullDate={moment({ day: day, month: this.state.dateObject.month() })}
+          fullDate={moment({ day: day, month: this.state.initialDate.month() })}
           addReminder={this.addReminder}
           editReminder={this.editReminder}
           deleteReminder={this.deleteReminder}
@@ -125,15 +125,15 @@ export default class Calendar extends React.Component {
     switch (change) {
       case "NEXT":
         this.setState({
-          dateObject: moment(this.state.dateObject).month(
-            this.state.dateObject.month() + 1
+          initialDate: moment(this.state.initialDate).month(
+            this.state.initialDate.month() + 1
           ),
         });
         break;
       case "PREV":
         this.setState({
-          dateObject: moment(this.state.dateObject).month(
-            this.state.dateObject.month() - 1
+          initialDate: moment(this.state.initialDate).month(
+            this.state.initialDate.month() - 1
           ),
         });
         break;
