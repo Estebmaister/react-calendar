@@ -69,16 +69,16 @@ class Calendar extends React.Component {
     for (let day = 1; day <= this.lastDayOfMonth(); day++) {
       let fullDate = moment({
         day: day,
-        month: moment().month(),
+        month: this.state.dateNow.month(),
       }).format("YYYY-MM-DD");
       daysInMonth.push(
         <Day
           key={"day" + day}
           day={day}
-          month={moment().month()}
-          currentDay={day === 2 ? "today" : ""}
+          month={this.state.dateNow.month()}
+          currentDay={day === this.state.selectedDay ? "today" : ""}
           onDayClick={this.onDayClick}
-          fullDate={moment({ day: day, month: moment().month() })}
+          fullDate={moment({ day: day, month: this.state.dateNow.month() })}
           addReminder={this.addReminder}
           editReminder={this.editReminder}
           deleteReminder={this.deleteReminder}
