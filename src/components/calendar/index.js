@@ -76,6 +76,7 @@ class Calendar extends React.Component {
         <Day
           key={"day" + day}
           day={day}
+          month={this.state.dateNow.month()}
           currentDay={day === this.state.selectedDay ? "today" : ""}
           onDayClick={this.onDayClick}
           fullDate={moment({ day: day, month: this.state.dateNow.month() })}
@@ -83,7 +84,7 @@ class Calendar extends React.Component {
           editReminder={this.editReminder}
           deleteReminder={this.deleteReminder}
           deleteAllReminders={this.deleteAllDayReminders}
-          reminders={this.props.reminders[fullDate]}
+          remindersUp={this.props.reminders[fullDate]}
         />
       );
     }
